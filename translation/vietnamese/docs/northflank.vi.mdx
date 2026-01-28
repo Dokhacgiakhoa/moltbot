@@ -1,0 +1,35 @@
+---
+title: Triển khai trên Northflank
+---
+
+Triển khai Moltbot trên Northflank với mẫu có sẵn và hoàn thiện việc thiết lập ngay trên trình duyệt. Đây là cách dễ nhất cho những người "không muốn dùng dòng lệnh trên máy chủ": Northflank sẽ vận hành Gateway cho bạn, và bạn chỉ cần cấu hình mọi thứ qua trình hướng dẫn web `/setup`.
+
+## Các bước bắt đầu
+
+1. Nhấn vào [Deploy Moltbot](https://northflank.com/stacks/deploy-moltbot) để mở mẫu thiết lập.
+2. Tạo [tài khoản Northflank](https://app.northflank.com/signup) nếu bạn chưa có.
+3. Nhấn **Deploy Moltbot now**.
+4. Thiết lập biến môi trường bắt buộc: `SETUP_PASSWORD`.
+5. Nhấn **Deploy stack** để bắt đầu xây dựng và chạy Moltbot.
+6. Chờ quá trình triển khai hoàn tất, sau đó nhấn **View resources**.
+7. Mở dịch vụ Moltbot và truy cập URL công khai.
+8. Hoàn tất việc thiết lập tại đường dẫn `/setup` và sử dụng tại `/moltbot`.
+
+## Những gì bạn nhận được
+
+- Một máy chủ lưu trữ Moltbot Gateway + Giao diện điều khiển (Control UI).
+- Trình hướng dẫn thiết lập web tại `/setup` (không cần dùng lệnh terminal).
+- Lưu trữ dữ liệu cố định qua ổ đĩa Northflank Volume (`/data`), đảm bảo cấu hình, thông tin xác thực và không gian làm việc của bạn không bị mất khi khởi động lại máy chủ.
+
+## Quy trình thiết lập
+
+1. Truy cập `https://<tên-miền-northflank-của-bạn>/setup` và nhập `SETUP_PASSWORD`.
+2. Chọn nhà cung cấp mô hình/xác thực và dán mã API key của bạn.
+3. (Tùy chọn) Thêm các mã Token của Telegram/Discord/Slack.
+4. Nhấn **Run setup**.
+5. Mở giao diện điều khiển tại `https://<tên-miền-northflank-của-bạn>/moltbot`.
+
+Nếu bạn chọn phương thức ghép nối (pairing) cho Telegram, trình hướng dẫn thiết lập này cũng có thể dùng để phê duyệt mã ghép nối (pairing code).
+
+---
+Tài liệu liên quan: [Lưu trữ VPS](./vps.vi.md), [Hướng dẫn Railway](./railway.vi.mdx).

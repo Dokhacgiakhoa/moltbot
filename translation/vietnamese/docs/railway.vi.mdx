@@ -1,0 +1,51 @@
+---
+title: Triển khai trên Railway
+---
+
+Triển khai Moltbot trên Railway với mẫu (template) có sẵn và hoàn tất thiết lập ngay trong trình duyệt. Đây là cách dễ nhất cho những người "không muốn dùng dòng lệnh trên máy chủ": Railway sẽ chạy Gateway cho bạn, và bạn chỉ cần cấu hình mọi thứ qua trình hướng dẫn web `/setup`.
+
+## Danh mục kiểm tra nhanh (Cho người mới)
+
+1. Click vào nút **Deploy on Railway** (bên dưới).
+2. Thêm một **Volume** và gắn (mount) tại đường dẫn `/data`.
+3. Thiết lập các **Variables** cần thiết (ít nhất phải có `SETUP_PASSWORD`).
+4. Bật **HTTP Proxy** trên cổng `8080`.
+5. Mở `https://<tên-miền-railway-của-bạn>/setup` để hoàn tất hướng dẫn.
+
+## Triển khai một chạm
+
+<a href="https://railway.com/deploy/moltbot-railway-template" target="_blank" rel="noreferrer">Deploy on Railway</a>
+
+Sau khi triển khai, hãy tìm URL công khai của bạn tại **Railway → service của bạn → Settings → Domains**.
+
+Các đường dẫn quan trọng:
+- `https://<miền-của-bạn>/setup` — Trình hướng dẫn thiết lập (được bảo mật bằng mật khẩu).
+- `https://<miền-của-bạn>/moltbot` — Giao diện điều khiển (Control UI).
+
+## Các thiết lập bắt buộc trên Railway
+
+### Mạng công khai (Public Networking)
+- Cổng (Port): `8080` (Bật HTTP Proxy).
+
+### Lưu trữ dữ liệu (Volume)
+- Điểm gắn (Mount path): `/data`.
+
+### Biến môi trường (Variables)
+- `SETUP_PASSWORD`: (Bắt buộc) Mật khẩu để truy cập trang thiết lập.
+- `PORT`: `8080` (Bắt buộc - phải khớp với cổng mạng).
+- `CLAWDBOT_STATE_DIR`: `/data/.clawdbot` (Khuyên dùng).
+- `CLAWDBOT_WORKSPACE_DIR`: `/data/workspace` (Khuyên dùng).
+
+## Quy trình thiết lập
+
+1. Truy cập `https://<miền-của-bạn>/setup` và nhập `SETUP_PASSWORD`.
+2. Chọn mô hình AI/nhà cung cấp và dán mã API key của bạn.
+3. (Tùy chọn) Thêm mã Token của Telegram/Discord/Slack.
+4. Nhấn **Run setup**.
+
+## Sao lưu và Di chuyển
+
+Bạn có thể tải bản sao lưu tại: 
+- `https://<miền-của-bạn>/setup/export`
+
+Tệp này sẽ chứa toàn bộ trạng thái và không gian làm việc của Moltbot, giúp bạn có thể di chuyển sang máy chủ khác mà không bị mất cấu hình hay dữ liệu bộ nhớ.

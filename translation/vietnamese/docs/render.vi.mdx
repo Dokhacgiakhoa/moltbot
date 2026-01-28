@@ -1,0 +1,55 @@
+---
+title: Triển khai trên Render
+---
+
+Triển khai Moltbot trên Render bằng phương thức Infrastructure as Code. Tệp `render.yaml` đi kèm định nghĩa toàn bộ hạ tầng của bạn một cách rõ ràng: từ dịch vụ, ổ đĩa cho đến các biến môi trường. Điều này cho phép bạn triển khai chỉ với một cú nhấp chuột và quản lý hạ tầng ngay trong mã nguồn.
+
+## Điều kiện tiên quyết
+
+- Một tài khoản [Render](https://render.com) (có gói miễn phí).
+- Mã API key từ [nhà cung cấp mô hình AI](../providers/index.vi.md) của bạn.
+
+## Triển khai bằng Render Blueprint
+
+<a href="https://render.com/deploy?repo=https://github.com/moltbot/moltbot" target="_blank" rel="noreferrer">Triển khai lên Render</a>
+
+Khi nhấn vào liên kết này:
+1. Một dịch vụ Render mới sẽ được tạo dựa trên tệp `render.yaml` gốc.
+2. Bạn sẽ được yêu cầu nhập `SETUP_PASSWORD`.
+3. Render sẽ xây dựng Docker image và tiến hành triển khai.
+
+Sau khi hoàn tất, URL dịch vụ của bạn sẽ có dạng `https://<tên-dịch-vụ>.onrender.com`.
+
+## Lựa chọn gói dịch vụ (Plan)
+
+| Gói | Nghỉ khi không dùng | Ổ đĩa (Disk) | Phù hợp cho |
+|------|-----------|------|----------|
+| Free | Sau 15 phút | Không hỗ trợ | Thử nghiệm, demo |
+| Starter | Luôn chạy | 1GB+ | Cá nhân, nhóm nhỏ |
+| Standard | Luôn chạy | 1GB+ | Sản xuất, nhiều kênh chat |
+
+**Lưu ý**: Gói miễn phí (Free) không hỗ trợ ổ đĩa cứng cố định, nghĩa là dữ liệu cấu hình sẽ bị mất mỗi khi bạn triển khai lại mã nguồn. Nên dùng gói **Starter** trở lên để dữ liệu được lưu trữ an toàn.
+
+## Sau khi triển khai
+
+### Hoàn tất trình hướng dẫn thiết lập
+1. Truy cập `https://<tên-miền-của-bạn>.onrender.com/setup`.
+2. Nhập `SETUP_PASSWORD` bạn đã đặt.
+3. Chọn nhà cung cấp mô hình và dán API key.
+4. Cấu hình các kênh nhắn tin (Telegram, Discord, Slack) nếu cần.
+5. Nhấn **Run setup**.
+
+### Truy cập giao diện điều khiển
+Bảng điều khiển web có tại địa chỉ: `https://<tên-miền-của-bạn>.onrender.com/moltbot`.
+
+## Các tính năng trên bảng điều khiển Render
+- **Nhật ký (Logs)**: Xem nhật ký thời gian thực của quá trình xây dựng và chạy ứng dụng.
+- **Dòng lệnh (Shell)**: Truy cập trực tiếp vào hệ điều hành của máy chủ để gỡ lỗi. Ổ đĩa dữ liệu được gắn tại `/data`.
+- **Biến môi trường**: Chỉnh sửa các cài đặt trong mục **Environment**. Mỗi khi thay đổi, hệ thống sẽ tự động triển khai lại.
+
+## Sao lưu và Di chuyển
+Bạn có thể tải bản sao lưu cấu hình và không gian làm việc bất cứ lúc nào tại:
+`https://<tên-miền-của-bạn>.onrender.com/setup/export`
+
+---
+Tài liệu liên quan: [Lưu trữ VPS](./vps.vi.md), [Cấu hình Gateway](../../gateway/configuration.vi.md).
